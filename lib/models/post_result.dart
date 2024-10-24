@@ -8,11 +8,7 @@ class PostResult {
   String job;
   String created;
 
-  PostResult(
-      {required this.id,
-      required this.name,
-      required this.job,
-      required this.created});
+  PostResult({this.id = "", this.name = "", this.job = "", this.created = ""});
 
   factory PostResult.createPostResult(Map<String, dynamic> object) {
     return PostResult(
@@ -25,7 +21,7 @@ class PostResult {
     String apiURL = "https://reqres.in/api/users";
 
     var apiResult =
-        await http.post(apiURL as Uri, body: {"name": name, "job": job});
+        await http.post(Uri.parse(apiURL), body: {"name": name, "job": job});
     var jsonObject = json.decode(apiResult.body);
 
     return PostResult.createPostResult(jsonObject);
